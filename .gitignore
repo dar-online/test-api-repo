@@ -1,3 +1,5 @@
-.idea
+# Directory
+.idea/
 *.sqlite3
+# macOS Files
 .DS_Store
