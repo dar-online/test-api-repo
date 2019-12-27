@@ -1,0 +1,11 @@
+{% extends "auto/base.html" %}
+{% block title %}{% if order %}{{ order.category }}{% else %}Order{% endif %}{% endblock %}
+{% block content %}
+    <h1>Orders</h1>
+    {% for order in orders %}
+        <h2>
+            <a href="{{ order.get_absolute_url }}">{{ order.marka }} {{ order.model }}</a>
+        </h2>
+        <p>Autor: {{ order.autor_name }} </p>
+    {% endfor %}
+{% endblock %}
