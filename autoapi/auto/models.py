@@ -1,54 +1,56 @@
 from django.db import models
-from django.urls import reverse
 
 # Create your models here.
 
 
-class Marka(models.Model):
-    marka = models.CharField(max_length=250, db_index=True)
-    object = models.Manager()
-
-    class Meta:
-        ordering = ['marka']
-
-    def __str__(self):
-        return self.marka
-
-
-class Modell(models.Model):
-    model = models.CharField(max_length=250, db_index=True)
-    object = models.Manager()
-
-    class Meta:
-        ordering = ['model']
-
-    def __str__(self):
-        return self.model
-
-class Order(models.Model):
-
-    CATEGORY_CHOICES = (
-        ('to 1990', ' To 1990'),
-        ('from 1990 to 2000', 'From 1990 to 2000'),
-        ('from 2000 to 2010', 'From 2000 to 2010'),
-        ('after 2010', 'After 2010')
-    )
-    autor_name = models.CharField(max_length=250, db_index=True)
-    marka = models.ForeignKey(Marka, on_delete=models.CASCADE,related_name='markas')
-    model = models.ForeignKey(Modell, on_delete=models.CASCADE,related_name='models')
-    category = models.CharField(max_length=50, choices=CATEGORY_CHOICES, default='to 1990')
-    release = models.DateField(auto_now_add=False)
-    price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+class Category(models.Model):
+    category = models.CharField(max_length=255, verbose_name='Категория')
+    min_date = models.SmallIntegerField(verbose_name='min_date')
+    max_date = models.SmallIntegerField(verbose_name='max_date')
 
     object = models.Manager()
 
-    def get_absolute_url(self):
-        return reverse('auto:order_detail', args=[self.id])
+    def __str__(self):
+        return self.category
 
     class Meta:
-        unique_together = ['marka', 'model']
-        ordering = ['autor_name']
+        verbose_name = 'Категория'
+        verbose_name_plural = 'Категории'
+
+
+class CarMarka(models.Model):
+    car_marka = models.CharField(max_length=255, verbose_name='Марка авто')
 
     def __str__(self):
-        return self.autor_name
+        return self.car_marka
 
+    class Meta:
+        verbose_name = 'Марка авто'
+        verbose_name_plural = 'Марка авто'
+
+
+class CarModel(models.Model):
+    car_model = models.CharField(max_length=255, verbose_name='Модель авто')
+
+    def __str__(self):
+        return self.car_model
+
+    class Meta:
+        verbose_name = 'Модель авто'
+        verbose_name_plural = 'Модель авто'
+
+class Car(models.Model):
+
+    price = models.SmallIntegerField(verbose_name='Цена')
+    year = models.SmallIntegerField(verbose_name='Год выпуска')
+    name = models.CharField(max_length=255, verbose_name='Имя владельца')
+
+    car_cat = models.CharField(verbose_name='Категория', max_length=255, default='do 1990')
+    car_marka = models.ForeignKey(CarMarka, verbose_name='Марка', related_name='car_marks', on_delete=models.CASCADE)
+    car_model = models.ForeignKey(CarModel, verbose_name='Модель', related_name='car_models', on_delete=models.CASCADE)
+
+    object= models.Manager()
+
+    class Meta:
+        verbose_name = 'Автомобиль'
+        verbose_name_plural = 'Автомобили'

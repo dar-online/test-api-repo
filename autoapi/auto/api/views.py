@@ -1,9 +1,9 @@
 from rest_framework import generics, viewsets
-from ..models import Order, Marka
-from .serializers import OrderSerializer, MarkaSerializer
+from ..models import *
+from .serializers import CarSerializer
 
 
 class OrdertListView(generics.ListAPIView):
-    queryset = Order.object.all()
-    serializer_class = OrderSerializer
+    queryset = Car.object.all()
+    serializer_class = CarSerializer
 

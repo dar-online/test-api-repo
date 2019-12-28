@@ -1,0 +1,25 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Car-order</title>
+
+</head>
+<body>
+
+    <div class="container">
+        <div>
+            <div>
+                {% block car_list %}
+                {% endblock %}
+
+                {% block car_add %}
+                {% endblock %}
+
+                {% block thank_you %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

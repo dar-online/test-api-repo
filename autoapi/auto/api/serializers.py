@@ -1,29 +1,27 @@
 from rest_framework import serializers
-from ..models import Order
-from ..models import Marka
-from ..models import Modell
+from ..models import *
 
 
 class MarkaSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Marka
-        fields = ('id','marka')
+        model = CarMarka
+        fields = ('id','car_marka')
         depth = 1
 
 
 class ModellSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = Modell
-        fields = ('id','model')
+        model = CarModel
+        fields = ('id','car_model')
         depth = 1
 
 
-class OrderSerializer(serializers.ModelSerializer):
-    marka_name = MarkaSerializer(source='marka', read_only=True)
-    model_name = ModellSerializer(source='model', read_only=True)
+class CarSerializer(serializers.ModelSerializer):
+    marka_name = MarkaSerializer(source='car_marka', read_only=True)
+    model_name = ModellSerializer(source='car_model', read_only=True)
 
     class Meta:
-        model = Order
-        fields = ['id', 'marka_name', 'model_name', 'release','category' ,'price']
+        model = Car
+        fields = ['name', 'marka_name', 'model_name', 'year','car_cat' ,'price']
 

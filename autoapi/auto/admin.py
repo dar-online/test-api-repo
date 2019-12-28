@@ -1,21 +1,27 @@
 from django.contrib import admin
-from .models import Marka, Modell, Order
-
+from auto.models import *
 
 # Register your models here.
 
+@admin.register(Category)
+class AdminCategory(admin.ModelAdmin):
+    list_display = ('id', 'category')
+    list_filter = ('category',)
 
-@admin.register(Order)
-class OrderAdmin(admin.ModelAdmin):
-    list_display = ('autor_name', 'marka', 'model', 'category', 'release', 'price')
-    list_filter = ('autor_name', 'marka', 'model', 'category', 'release', 'price')
-    date_hierarchy = 'release'
-    ordering = ('category', 'release')
 
-@admin.register(Marka)
-class MarkaAdmin(admin.ModelAdmin):
-    list_display = ('marka',)
+@admin.register(CarMarka)
+class AdminCarMark(admin.ModelAdmin):
+    list_display = ('id', 'car_marka')
+    list_filter = ('car_marka',)
 
-@admin.register(Modell)
-class ModellAdmin(admin.ModelAdmin):
-    list_display = ('model',)
+
+@admin.register(CarModel)
+class AdminCarModel(admin.ModelAdmin):
+    list_display = ('id', 'car_model')
+    list_filter = ('car_model',)
+
+
+@admin.register(Car)
+class AdminCar(admin.ModelAdmin):
+    list_display = ('id', 'price', 'year', 'name', 'car_marka', 'car_model')
+    list_filter = ('price', 'year', 'name')
