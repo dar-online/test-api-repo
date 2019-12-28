@@ -1,6 +1,7 @@
-from django.shortcuts import render, get_object_or_404
-from .models import Order, Modell, Marka
+from django.shortcuts import render, get_object_or_404, redirect
+from .models import Order
 from .forms import OrderForms
+from django.urls import reverse
 
 
 def order_create(request):
@@ -14,7 +15,6 @@ def order_create(request):
 
         create = OrderForms(request.POST)
     return render(request, 'auto/order/create.html',{'create':create} )
-
 
 
 # Create your views here.
