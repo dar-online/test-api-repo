@@ -39,7 +39,7 @@ def car_form(request):
                 year = year,price=price,name=name,car_cat=car_category,car_marka=car_marka,car_model=car_model
             )
             qwe.save()
-            return render(request, 'thank_you.html')
+            return render(request, 'add_complete.html')
 
     else:
         form = CarAddForm()
