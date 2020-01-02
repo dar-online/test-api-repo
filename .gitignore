@@ -4,3 +4,5 @@
 # macOS Files
 **/.DS_Store
 /testvenv/
+**/__pycache__
+
