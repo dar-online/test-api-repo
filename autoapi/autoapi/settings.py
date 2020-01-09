@@ -37,30 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'auto.apps.AutoConfig',
     'rest_framework',
-    'django_celery_results',
-    'payment.apps.PaymentConfig',
 ]
 
-# CELERY SETTINGS
-CELERY_BROKER_URL = 'redis://localhost:6379'
-CELERY_RESULT_BACKEND = 'redis://localhost:6379'
-CELERY_ACCEPT_CONTENT = ['application/json']
-CELERY_RESULT_SERIALIZER = 'json'
-CELERY_TASK_SERIALIZER = 'json'
-
-# PAYMENT SETTINGS
-BRAINTREE_MERCHANT_ID = '4m8xqn6gm2dvzyqq'  # ID продавца.
-BRAINTREE_PUBLIC_KEY = 'sd9w7n7wdnjsqh5s'  # Публичный ключ.
-BRAINTREE_PRIVATE_KEY = '37367c33dacc1be4e9737dccfc572c9a'  # Секретный ключ.
-
-from braintree import Configuration, Environment
-
-Configuration.configure(
-    Environment.Sandbox,
-    BRAINTREE_MERCHANT_ID,
-    BRAINTREE_PUBLIC_KEY,
-    BRAINTREE_PRIVATE_KEY
-)
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
